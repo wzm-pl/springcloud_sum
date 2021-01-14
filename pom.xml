@@ -9,6 +9,7 @@
         <module>api</module>
         <module>feign</module>
         <module>provider</module>
+        <module>zuul</module>
     </modules>
 
     <parent>

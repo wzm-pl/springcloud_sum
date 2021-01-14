@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap3/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css"/>
+    <script src="../js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css"/>
+    <script src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+
+    <script src="../js/bootstrap-bootbox/bootbox.all.min.js"></script>
+
+</head>
+<body>
+<!--<span id="show"></span>-->
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">高级搜索</div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">名称</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="inputName"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-md-offset-2">
+                        <input onclick="searchPeriodical()" type="button" class="btn btn-info btn-lg btn-block" value="搜索"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="toolbar">
+    <button onclick="openAddDialog()" type="button" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i>新增</button>
+    <!--<button onclick="delMusic()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>刪除</button>-->
+</div>
+<div class="table" id="periodsTable">
+    <span id="show"></span>
+</div>
+</body>
+<script>
+    $(function () {
+        $("#show").html(acceptParam());
+        initPeriodsTable();
+        //getId();
+    })
+    function acceptParam() {
+        var result;
+        var url = location.search;
+        if (url.indexOf("?")!=-1){
+            result = url.substr(url.indexOf("=")+1);
+        }
+        return result;
+    }
+
+    function initPeriodsTable(){
+        var id = document.getElementById("show").innerText;
+        $("#periodsTable").bootstrapTable({
+            url:'../periods'+id,
+            pagination:true,
+            toolbar:'#toolbar',
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页
+            pageList:[5, 10, 20, 50],//分页组件
+            pageNumber:1,
+            pageSize:5,//默认每页条数
+            method:'get',
+            contentType:'application/x-www-form-urlencoded',//post请求按照表单方式
+            clickToSelect: true, //是否启用点击选中行
+            striped:true,//斑马线
+            queryParams:function(){
+                var inputName = $("#inputName").val();
+                //var inputType = $("#inputType").val();
+                return {
+                    page:this.pageNumber,
+                    rows:this.pageSize,
+                    periods:inputName,
+                    //typeId:inputType
+                };
+            },
+            columns:[
+                {checkbox:true},
+                {field:'periods',title:'名称'},
+                {field:'paperParice',title:'代号'},
+                /*{field:'periodicalStatus',title:'OA上线状态'},
+                {field:'launchDate',title:'OA上线日期'},
+                {field:'tagName',title:'标签名称'},
+                {field:'copyright',title:'版权状态'},
+                {field:'price',title:'价格'},
+                {field:'readPages',title:'试读页数'},*/
+                {field:'cz',title:'操作',formatter:function(value,row,index){
+                        return '<a class="btn btn-primary" href="javascript:delStaff('+row.id+');">删除</a>'+'<a class="btn btn-default" href="javascript:editStaff('+row.id+');">修改</a>'+'<a href="javascript:toPeriodsPage('+row.periodicalId+');">期数</a>'
+                    }},
+            ]
+        })
+    }
+
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
+    /*function getId() {
+        var id = document.getElementById("show").innerText;
+        alert(id);
+    }*/
+</script>
+</html>

@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: provider
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/mysqldb?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
