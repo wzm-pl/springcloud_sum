@@ -6,10 +6,7 @@ import com.jk.model.TreeBean;
 import com.jk.service.PerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -39,9 +36,34 @@ public class PeriodicalController {
         return perService.findPeriodicalList(page,rows,periodicalBean);
     }
 
-    @GetMapping("periods")
+    @PutMapping("periodical")
     @ResponseBody
-    public Map findPeriodsList(Integer page, Integer rows, PeriodsBean periodsBean,String id){
+    public void updatePeriodical(PeriodicalBean periodicalBean){
+        perService.updatePeriodical(periodicalBean);
+    }
+
+    /**
+     * 期刊回显
+     * @param id
+     * @return
+     */
+    @GetMapping("periodical/{id}")
+    @ResponseBody
+    public PeriodicalBean findPeriodicalInfoById(@PathVariable("id") Integer id){
+        return perService.findPeriodicalInfoById(id);
+    }
+
+    /**
+     * 根据期刊id查询期数
+     * @param page
+     * @param rows
+     * @param periodsBean
+     * @param id
+     * @return
+     */
+    @GetMapping("periods/{id}")
+    @ResponseBody
+    public Map findPeriodsList(Integer page, Integer rows, PeriodsBean periodsBean,@PathVariable("id") String id){
         return perService.findPeriodsList(page,rows,periodsBean,id);
     }
 }

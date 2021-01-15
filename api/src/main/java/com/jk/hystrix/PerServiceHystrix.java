@@ -25,4 +25,14 @@ public class PerServiceHystrix implements PerService {
     public List<TreeBean> findNavTree() {
         return null;
     }
+
+    @Override
+    public PeriodicalBean findPeriodicalInfoById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void updatePeriodical(PeriodicalBean periodicalBean) {
+
+    }
 }

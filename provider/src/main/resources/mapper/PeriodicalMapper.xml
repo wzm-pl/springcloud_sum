@@ -5,22 +5,22 @@
 
 	<select id="queryPeriodsCount" resultType="int" parameterType="map">
 		SELECT count(1) FROM t_periods where perId = #{id}
-		<include refid="periodicalWhere"></include>
+		<!--<include refid="periodicalWhere"></include>-->
 	</select>
 
 	<select id="findPeriodsList" parameterType="map" resultType="com.jk.model.PeriodicalBean">
-		SELECT * FROM t_periodical where perId = #{id}
-		<include refid="periodicalWhere"></include>
+		SELECT * FROM t_periods where perId = #{id}
+		<!--<include refid="periodicalWhere"></include>-->
 		limit #{start},#{end }
 	</select>
 
-	<sql id="periodicalWhere">
+	<!--<sql id="periodicalWhere">
 		<where>
 			<if test="periodicalBean.periodicalName != null and periodicalBean.periodicalName != ''">
 				and periodicalName like '%${periodicalBean.periodicalName}%'
 			</if>
 		</where>
-	</sql>
+	</sql>-->
 
 	<select id="queryCount" resultType="int" parameterType="map">
 		SELECT count(1) FROM t_periodical

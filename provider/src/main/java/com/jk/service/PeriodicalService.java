@@ -13,4 +13,8 @@ public interface PeriodicalService {
     List<TreeBean> findNavTree();
 
     Map findPeriodsList(Integer page, Integer rows, PeriodsBean periodsBean,String id);
+
+    PeriodicalBean findPeriodicalInfoById(Integer id);
+
+    void updatePeriodical(PeriodicalBean periodicalBean);
 }

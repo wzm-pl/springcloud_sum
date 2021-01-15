@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<!--<span id="show"></span>-->
+<span id="show"></span>
 <div>
     <div class="panel panel-default">
         <div class="panel-heading">高级搜索</div>
@@ -44,7 +44,7 @@
     <!--<button onclick="delMusic()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>刪除</button>-->
 </div>
 <div class="table" id="periodsTable">
-    <span id="show"></span>
+    <!--<span id="show"></span>-->
 </div>
 </body>
 <script>
@@ -65,7 +65,7 @@
     function initPeriodsTable(){
         var id = document.getElementById("show").innerText;
         $("#periodsTable").bootstrapTable({
-            url:'../periods'+id,
+            url:'../periods/'+id,
             pagination:true,
             toolbar:'#toolbar',
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页
@@ -76,7 +76,7 @@
             contentType:'application/x-www-form-urlencoded',//post请求按照表单方式
             clickToSelect: true, //是否启用点击选中行
             striped:true,//斑马线
-            queryParams:function(){
+            queryParams:function(id){
                 var inputName = $("#inputName").val();
                 //var inputType = $("#inputType").val();
                 return {
@@ -88,32 +88,28 @@
             },
             columns:[
                 {checkbox:true},
-                {field:'periods',title:'名称'},
-                {field:'paperParice',title:'代号'},
-                /*{field:'periodicalStatus',title:'OA上线状态'},
-                {field:'launchDate',title:'OA上线日期'},
-                {field:'tagName',title:'标签名称'},
-                {field:'copyright',title:'版权状态'},
-                {field:'price',title:'价格'},
-                {field:'readPages',title:'试读页数'},*/
-                {field:'cz',title:'操作',formatter:function(value,row,index){
-                        return '<a class="btn btn-primary" href="javascript:delStaff('+row.id+');">删除</a>'+'<a class="btn btn-default" href="javascript:editStaff('+row.id+');">修改</a>'+'<a href="javascript:toPeriodsPage('+row.periodicalId+');">期数</a>'
-                    }},
+                {field:'periods',title:'期数'},
+                {field:'paperParice',title:'纸刊价格'},
+                {field:'electronicEditionPrice',title:'电子版价格'},
+                {field:'toreadPages',title:'可读页数'},
+                {field:'online',title:'是否上线'},
+                {field:'pfl',title:'是否视听'},
+                {field:'toreadDate',title:'可读日期'},
+                {field:'publicationDate',title:'出版日期'},
+                {field:'onlineDate',title:'上线日期'},
+                {field:'perStatus',title:'状态'},
             ]
         })
     }
 
-    $('.date').datetimepicker({
+    /*$('.date').datetimepicker({
         language: 'zh-CN',//显示中文
         format: 'yyyy-mm-dd hh:ii:ss',//显示格式
         minView: "month",//设置只显示到月份
         initialDate: new Date(),//初始化当前日期
         autoclose: true,//选中自动关闭
         todayBtn: true//显示今日按钮
-    });
-    /*function getId() {
-        var id = document.getElementById("show").innerText;
-        alert(id);
-    }*/
+    });*/
+
 </script>
 </html>

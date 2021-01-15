@@ -39,7 +39,7 @@
     </div>
 </div>
 <div id="toolbar">
-    <button onclick="openAddDialog()" type="button" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i>新增</button>
+    <!--<button onclick="openAddDialog()" type="button" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i>新增</button>-->
     <!--<button onclick="delMusic()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>刪除</button>-->
 </div>
 <div class="table" id="periodicalTable"></div>
@@ -48,7 +48,7 @@
     $(function(){
         initPeriodicalTable();
     })
-    function openAddDialog(){
+    /*function openAddDialog(){
         bootbox.dialog({
             title:'<i class="glyphicon glyphicon-music"></i>新增音乐',
             closeButton: true,
@@ -64,50 +64,56 @@
                 }
             }
         })
-    }
-    function editStaff(id){
+    }*/
+    //期刊信息编辑
+    function openAddDialog(id){
         bootbox.dialog({
-            title:'<i class="glyphicon glyphicon-music"></i>编辑音乐',
+            title:'<i class="glyphicon glyphicon-music"></i>期刊信息编辑',
             closeButton: true,
             size: 'large',
-            message:createAddContent('../api-a/toEditPage'),
+            message:createAddContent('../toEditPage'),
             buttons:{
                 success:{
                     "label" : "<i class='icon-ok'></i> 保存",
                     "className" : "btn-sm btn-success",
                     "callback":function(){
-                        saveStaff();
+                        updatePeriodical();
                     }
                 }
             }
         })
-        initPidSelect2();
-        initDidSelect2();
         $.ajax({
-            url:'../api-a/staff/'+id,
+            url:'../periodical/'+id,
             type:'get',
             /*data:{
                 id:id
             },*/
             dataType:'json',
             success:function(data){
-                $("#inputStaffId").val(data.id);
-                $("#inputStaffName").val(data.name);
-                $("#inputStaffPassword").val(data.password);
-                $("#inputStaffPid").val(data.pid);
-                $("#inputStaffDid").val(data.did);
-                $("#inputStaffPay").val(data.pay);
-                $("#inputStaffMotto").val(data.motto);
+                $("#inputPeriodicalId").val(data.periodicalId);
+                $("#inputPeriodicalName").val(data.periodicalName);
+                $("#inputPeriodicalCode").val(data.periodicalCode);
+                if (data.periodicalStatus==0){
+                    $("#inputPeriodicalStatus2").attr('checked','checked');
+                }
+                if (data.periodicalStatus==1){
+                    $("#inputPeriodicalStatus").attr('checked','checked');
+                }
+                $("#inputLaunchDate").val(data.launchDate);
+                $("#inputTagName").val(data.tagName);
+                $("#inputCopyright").val(data.copyright);
+                $("#inputPrice").val(data.price);
+                $("#inputReadPages").val(data.readPages);
             }
         })
     }
-    function saveStaff(){
+    function updatePeriodical(){
         $.ajax({
-            url:'../api-a/staff',
-            type:'post',
-            data:$("#staffForm").serialize(),
+            url:'../periodical',
+            type:'put',
+            data:$("#periodicalForm").serialize(),
             success:function(data){
-                searchStaff();
+                searchPeriodical();
             }
 
         })
@@ -175,28 +181,15 @@
                 {field:'price',title:'价格'},
                 {field:'readPages',title:'试读页数'},
                 {field:'cz',title:'操作',formatter:function(value,row,index){
-                        return '<a class="btn btn-primary" href="javascript:delStaff('+row.id+');">删除</a>'+'<a class="btn btn-default" href="javascript:editStaff('+row.id+');">修改</a>'+'<a href="javascript:toPeriodsPage('+row.periodicalId+');">期数</a>'
+                        return '<a class="btn btn-primary" href="javascript:openAddDialog('+row.periodicalId+');">编辑</a>'+'<a class="btn btn-default" href="javascript:editStaff('+row.id+');">设置</a>'+'<a href="javascript:toPeriodsPage('+row.periodicalId+');">期数</a>'
                     }},
             ]
         })
     }
-
+    //期数
     function toPeriodsPage(id) {
         //alert(id)
         location.href="../toPeriodsPage?id="+id;
-    }
-
-    function delStaff(id){
-        /*$.delete("../book",{id:id},function (data) {
-            searchPhone();
-        })*/
-        $.ajax({
-            url:'../api-a/staff/'+id,
-            type:'delete',
-            success:function (data) {
-                searchStaff();
-            }
-        })
     }
 
     $('.date').datetimepicker({

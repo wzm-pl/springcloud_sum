@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.MediaMapper">
+
+
+
+	<!--<delete id="delMusic" parameterType="int">
+		delete from t_music where id in
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<select id="findMusicCount" parameterType="map" resultType="int">
+		select count(1) from t_music tm left join t_music_type tmt on tm.typeId = tmt.id
+		<include refid="musicWhere"></include>
+	</select>
+	<select id="findMusicList" parameterType="map" resultType="com.jk.songxj.model.MusiceBean">
+		select tm.*,tmt.name as typeName from t_music tm left join t_music_type tmt on tm.typeId = tmt.id
+		<include refid="musicWhere"></include>
+		limit #{start},#{end}
+	</select>
+	<sql id="musicWhere">
+		<where>
+			<if test="musiceBean.name != null and musiceBean.name != ''">
+				and tm.name like '%${musiceBean.name}%'
+			</if>
+			<if test="musiceBean.typeId != null and musiceBean.typeId != '-1'">
+				and tm.typeId = #{musiceBean.typeId}
+			</if>
+		</where>
+	</sql>-->
+</mapper>

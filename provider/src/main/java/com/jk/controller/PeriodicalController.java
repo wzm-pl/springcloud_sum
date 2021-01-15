@@ -3,9 +3,11 @@ package com.jk.controller;
 import com.jk.model.PeriodicalBean;
 import com.jk.model.PeriodsBean;
 import com.jk.model.TreeBean;
+import com.jk.service.MediaService;
 import com.jk.service.PerService;
 import com.jk.service.PeriodicalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,6 +18,9 @@ public class PeriodicalController implements PerService {
 
     @Autowired
     private PeriodicalService periodicalService;
+
+    @Autowired
+    private MediaService mediaService;
 
     /**
      * 期数查询
@@ -49,5 +54,24 @@ public class PeriodicalController implements PerService {
     @Override
     public List<TreeBean> findNavTree() {
         return periodicalService.findNavTree();
+    }
+
+    /**
+     * 回显
+     * @param id
+     * @return
+     */
+    @Override
+    public PeriodicalBean findPeriodicalInfoById(Integer id) {
+        return periodicalService.findPeriodicalInfoById(id);
+    }
+
+    /**
+     * 修改
+     * @param periodicalBean
+     */
+    @Override
+    public void updatePeriodical(@RequestBody PeriodicalBean periodicalBean) {
+        periodicalService.updatePeriodical(periodicalBean);
     }
 }

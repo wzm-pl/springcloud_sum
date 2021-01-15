@@ -17,7 +17,7 @@ public class PeriodicalBean {  //期刊表
 
     private String launchDate;   //OA上线日期
 
-    private String tagName;   //标签名称
+    private Integer tagName;   //标签名称
 
     private Integer copyright;  //版权状态
 
@@ -32,4 +32,7 @@ public class PeriodicalBean {  //期刊表
     private Integer tid;   //期刊类型id
 
     private Integer userId;   //管理员id
+
+    //实体bean
+    //private PressBean press;
 }

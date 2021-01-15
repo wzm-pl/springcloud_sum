@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="periodicalForm" class="form-horizontal">
+    <input type="hidden" id="inputPeriodicalId" name="periodicalId">
+    <div class="form-group">
+        <label for="inputPeriodicalName" class="col-sm-2 control-label">期刊名称</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inputPeriodicalName" name="periodicalName">
+        </div>
+        <label for="inputPeriodicalCode" class="col-sm-2 control-label">代号</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inputPeriodicalCode" name="periodicalCode">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPeriodicalStatus" class="col-sm-3 control-label">OA上线状态</label>
+        <div>
+            <input type="radio" id="inputPeriodicalStatus" value="1" name="periodicalStatus">已上架
+            <input type="radio" id="inputPeriodicalStatus2" value="0" name="periodicalStatus">未上架
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputLaunchDate" class="col-sm-3 control-label">OA上线日期</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control date" id="inputLaunchDate" name="launchDate">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputTagName" class="col-sm-2 control-label">标签名称</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inputTagName" name="tagName">
+        </div>
+        <label for="inputCopyright" class="col-sm-2 control-label">版权状态:</label>
+        <div class="col-sm-4">
+            <select id="inputCopyright" class="form-control" name="copyright">
+                <option value="0">请选择</option>
+                <option value="1">版权</option>
+                <option value="2">内刊</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPrice" class="col-sm-2 control-label">价格：</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inputPrice" name="price">
+        </div>
+        <label for="inputReadPages" class="col-sm-2 control-label">试读页数</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="inputReadPages" name="readPages">
+        </div>
+    </div>
+</form>
+</body>
+<script>
+
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
+</script>
+</html>

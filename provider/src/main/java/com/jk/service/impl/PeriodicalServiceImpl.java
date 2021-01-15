@@ -53,6 +53,16 @@ public class PeriodicalServiceImpl implements PeriodicalService {
         return result;
     }
 
+    @Override
+    public PeriodicalBean findPeriodicalInfoById(Integer id) {
+        return periodicalMapper.findPeriodicalInfoById(id);
+    }
+
+    @Override
+    public void updatePeriodical(PeriodicalBean periodicalBean) {
+        periodicalMapper.updatePeriodical(periodicalBean);
+    }
+
     private List<TreeBean> findNodes(Integer id) {
         List<TreeBean> trees = periodicalMapper.findNavNode(id);
         for (TreeBean treeBean : trees) {

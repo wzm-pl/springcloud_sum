@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 
 
+    @RequestMapping("toEditPage")
+    public String toEditPage(){
+        return "editperiodical";
+    }
+
     @RequestMapping("toPeriodsPage")
     public String toPeriodsPage(){
         return "periods";
